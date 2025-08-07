@@ -60,4 +60,21 @@ This is a web application to discover and manage historical events for various c
 
 - **Home Page:** The main page displays a list of all countries with available historical data.
 - **Country Events Page:** Clicking on a country will take you to a page displaying all its historical events. You can filter the events by a start and end year.
-- **Add Event Page:** You can add new historical events through the "Add Event" page, which is accessible from the navigation bar.
+- **Add Event Page:** You can add new historical events with detailed information through the "Add Event" page, which is accessible from the navigation bar.
+
+## Data Model
+
+The application uses a relational database to store information about countries and their historical events.
+
+### Country
+- `name`: The name of the country.
+
+### Event
+- `title`: The title of the event.
+- `description`: A detailed description of the event.
+- `event_type`: The type or category of the event (e.g., "Battle", "Treaty").
+- `date_start` / `date_end`: The start and end dates for the event, allowing for both precise dates and periods.
+- `date_descriptor`: A text field for non-precise dates (e.g., "Summer 1944").
+- `location_name`: The name of the location or area.
+- `latitude` / `longitude`: Precise coordinates for future mapping features.
+- `era`: The historical era (e.g., "Renaissance").

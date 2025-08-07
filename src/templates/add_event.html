@@ -6,16 +6,54 @@
     <h1 class="mt-5">Add a New Historical Event</h1>
     <form method="post" class="mt-4">
         <div class="form-group">
-            <label for="country">Country</label>
-            <input type="text" class="form-control" id="country" name="country" required>
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" name="title" required>
         </div>
         <div class="form-group">
-            <label for="year">Year</label>
-            <input type="number" class="form-control" id="year" name="year" required>
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="country">Country</label>
+                <input type="text" class="form-control" id="country" name="country" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="event_type">Event Type</label>
+                <input type="text" class="form-control" id="event_type" name="event_type" placeholder="e.g., Battle, Treaty, Discovery">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="date_start">Start Date</label>
+                <input type="date" class="form-control" id="date_start" name="date_start">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="date_end">End Date (optional)</label>
+                <input type="date" class="form-control" id="date_end" name="date_end">
+            </div>
         </div>
         <div class="form-group">
-            <label for="event">Event Description</label>
-            <textarea class="form-control" id="event" name="event" rows="3" required></textarea>
+            <label for="date_descriptor">Date Descriptor</label>
+            <input type="text" class="form-control" id="date_descriptor" name="date_descriptor" placeholder="e.g., Summer 1944, c. 1800s">
+        </div>
+        <div class="form-group">
+            <label for="location_name">Location</label>
+            <input type="text" class="form-control" id="location_name" name="location_name" placeholder="e.g., Waterloo, Belgium">
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="location_latitude">Latitude</label>
+                <input type="number" step="any" class="form-control" id="location_latitude" name="location_latitude">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="location_longitude">Longitude</label>
+                <input type="number" step="any" class="form-control" id="location_longitude" name="location_longitude">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="era">Era</label>
+            <input type="text" class="form-control" id="era" name="era" placeholder="e.g., Renaissance, Viking Age">
         </div>
         <button type="submit" class="btn btn-primary">Add Event</button>
     </form>

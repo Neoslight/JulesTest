@@ -1,6 +1,7 @@
 from flask import Flask, render_template, url_for, request, redirect
 from src.models import db, Country, Event
 import config
+import datetime
 
 app = Flask(__name__, template_folder='src/templates', static_folder='src/static')
 app.config.from_object(config)
@@ -19,38 +20,35 @@ def country_events(country_name):
 
     query = Event.query.filter_by(country_id=country.id)
 
-    start_year_str = request.args.get('start_year', '')
-    end_year_str = request.args.get('end_year', '')
+    start_date_str = request.args.get('start_date', '')
+    end_date_str = request.args.get('end_date', '')
 
-    start_year = int(start_year_str) if start_year_str.isdigit() else None
-    end_year = int(end_year_str) if end_year_str.isdigit() else None
+    start_date = datetime.datetime.strptime(start_date_str, '%Y-%m-%d').date() if start_date_str else None
+    end_date = datetime.datetime.strptime(end_date_str, '%Y-%m-%d').date() if end_date_str else None
 
-    if start_year:
-        query = query.filter(Event.year >= start_year)
-    if end_year:
-        query = query.filter(Event.year <= end_year)
+    if start_date:
+        query = query.filter(Event.date_start >= start_date)
+    if end_date:
+        query = query.filter(Event.date_start <= end_date)
 
-    events = query.order_by(Event.year).all()
+    events = query.order_by(Event.date_start).all()
 
     return render_template('country_events.html',
                            country=country,
                            events=events,
-                           start_year=start_year or '',
-                           end_year=end_year or '')
+                           start_date=start_date_str,
+                           end_date=end_date_str)
 
 @app.route('/add', methods=['GET', 'POST'])
 def add_event():
     """Handles adding a new event."""
     if request.method == 'POST':
-        country_name = request.form['country']
-        year_str = request.form['year']
-        event_desc = request.form['event']
+        country_name = request.form.get('country')
+        title = request.form.get('title')
 
-        if not country_name or not year_str.isdigit() or not event_desc:
+        if not country_name or not title:
             # Simple validation, could be improved with flashing messages
             return redirect(url_for('add_event'))
-
-        year = int(year_str)
 
         # Find or create the country
         country = Country.query.filter_by(name=country_name).first()
@@ -59,8 +57,32 @@ def add_event():
             db.session.add(country)
             db.session.commit()
 
+        # Convert date strings to date objects, handling empty strings
+        date_start_str = request.form.get('date_start')
+        date_end_str = request.form.get('date_end')
+        date_start = datetime.datetime.strptime(date_start_str, '%Y-%m-%d').date() if date_start_str else None
+        date_end = datetime.datetime.strptime(date_end_str, '%Y-%m-%d').date() if date_end_str else None
+
+        # Convert lat/lon to float, handling empty strings
+        lat_str = request.form.get('location_latitude')
+        lon_str = request.form.get('location_longitude')
+        lat = float(lat_str) if lat_str else None
+        lon = float(lon_str) if lon_str else None
+
         # Create the new event
-        new_event = Event(year=year, event=event_desc, country_id=country.id)
+        new_event = Event(
+            title=title,
+            description=request.form.get('description'),
+            date_start=date_start,
+            date_end=date_end,
+            date_descriptor=request.form.get('date_descriptor'),
+            location_name=request.form.get('location_name'),
+            location_latitude=lat,
+            location_longitude=lon,
+            event_type=request.form.get('event_type'),
+            era=request.form.get('era'),
+            country_id=country.id
+        )
         db.session.add(new_event)
         db.session.commit()
 

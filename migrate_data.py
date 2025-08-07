@@ -1,5 +1,6 @@
 import json
 import os
+import datetime
 from app import app
 from src.models import db, Country, Event
 
@@ -36,9 +37,12 @@ def migrate_data():
                 db.session.commit()
 
             for event_data in events_data:
+                # Create a simple date object from the year
+                event_date = datetime.date(event_data['year'], 1, 1)
                 event = Event(
-                    year=event_data['year'],
-                    event=event_data['event'],
+                    title=event_data['event'],
+                    date_start=event_date,
+                    date_descriptor=str(event_data['year']),
                     country_id=country.id
                 )
                 db.session.add(event)

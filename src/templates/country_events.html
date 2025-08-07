@@ -7,35 +7,54 @@
 
     <form method="get" class="form-inline mt-4 mb-4">
         <div class="form-group mr-2">
-            <label for="start_year" class="mr-2">Start Year:</label>
-            <input type="number" class="form-control" id="start_year" name="start_year" value="{{ start_year }}">
+            <label for="start_date" class="mr-2">Start Date:</label>
+            <input type="date" class="form-control" id="start_date" name="start_date" value="{{ start_date }}">
         </div>
         <div class="form-group mr-2">
-            <label for="end_year" class="mr-2">End Year:</label>
-            <input type="number" class="form-control" id="end_year" name="end_year" value="{{ end_year }}">
+            <label for="end_date" class="mr-2">End Date:</label>
+            <input type="date" class="form-control" id="end_date" name="end_date" value="{{ end_date }}">
         </div>
         <button type="submit" class="btn btn-primary">Filter</button>
     </form>
 
     {% if events %}
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Year</th>
-                    <th scope="col">Event</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for event in events %}
-                    <tr>
-                        <td>{{ event.year }}</td>
-                        <td>{{ event.event }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="mt-4">
+            {% for event in events %}
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5>{{ event.title }}</h5>
+                    </div>
+                    <div class="card-body">
+                        {% if event.description %}
+                            <p class="card-text">{{ event.description }}</p>
+                        {% endif %}
+                        <ul class="list-group list-group-flush">
+                            {% if event.date_descriptor %}
+                                <li class="list-group-item"><strong>Date:</strong> {{ event.date_descriptor }}</li>
+                            {% elif event.date_start %}
+                                <li class="list-group-item">
+                                    <strong>Date:</strong> {{ event.date_start.strftime('%B %d, %Y') }}
+                                    {% if event.date_end and event.date_end != event.date_start %}
+                                        to {{ event.date_end.strftime('%B %d, %Y') }}
+                                    {% endif %}
+                                </li>
+                            {% endif %}
+                            {% if event.location_name %}
+                                <li class="list-group-item"><strong>Location:</strong> {{ event.location_name }}</li>
+                            {% endif %}
+                            {% if event.event_type %}
+                                <li class="list-group-item"><strong>Type:</strong> {{ event.event_type }}</li>
+                            {% endif %}
+                            {% if event.era %}
+                                <li class="list-group-item"><strong>Era:</strong> {{ event.era }}</li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     {% else %}
-        <p>No events found for this period.</p>
+        <p class="mt-4">No events found for this period.</p>
     {% endif %}
 
     <a href="{{ url_for('index') }}" class="btn btn-secondary mt-3">Back to Country List</a>
