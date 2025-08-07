@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Add New Event{% endblock %}
+
+{% block content %}
+    <h1 class="mt-5">Add a New Historical Event</h1>
+    <form method="post" class="mt-4">
+        <div class="form-group">
+            <label for="country">Country</label>
+            <input type="text" class="form-control" id="country" name="country" required>
+        </div>
+        <div class="form-group">
+            <label for="year">Year</label>
+            <input type="number" class="form-control" id="year" name="year" required>
+        </div>
+        <div class="form-group">
+            <label for="event">Event Description</label>
+            <textarea class="form-control" id="event" name="event" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Event</button>
+    </form>
+{% endblock %}
