@@ -41,7 +41,7 @@ This is a web application to discover and manage historical events for various c
 
 2.  **Run the web application:**
     ```bash
-    python3 src/app.py
+    python -m src.app
     ```
 
 3.  Open your web browser and navigate to `http://127.0.0.1:8080`.
