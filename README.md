@@ -18,10 +18,10 @@ This is a simple Python application to discover the main historical events of ea
 
 - `data/events.json`: Contains the historical events data in JSON format.
 - `src/models.py`: Defines the `Event` data model.
-- `src/data_loader.py`: Loads the event data from the JSON file.
+- `src/data_loader.py`: Loads and saves the event data from/to the JSON file.
 - `src/app.py`: The main application logic.
 
-## How to Run
+## Usage
 
 To run the application, execute the following command from the root directory:
 
@@ -29,4 +29,12 @@ To run the application, execute the following command from the root directory:
 python3 -m src.app
 ```
 
-This will run the main function in `src/app.py` and print the historical events for France as an example.
+The application will launch in interactive mode. You can enter the following commands:
+
+- **View events for a country:** Enter the name of a country (e.g., `France`).
+  - You will be prompted to enter an optional start and end year to filter the events.
+
+- **Add a new event:** Enter `add`.
+  - You will be prompted to enter the country, year, and a description for the new event.
+
+- **Quit:** Enter `quit` to exit the application.
