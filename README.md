@@ -8,28 +8,32 @@ This is a web application to discover and manage historical events for various c
 .
 ├── data
 │   └── events.json
+├── instance
+│   └── events.db
 ├── src
 │   ├── __init__.py
 │   ├── app.py
 │   ├── data_loader.py
-│   └── models.py
-├── static
-│   └── style.css
-├── templates
-│   ├── add_event.html
-│   ├── base.html
-│   ├── country_events.html
-│   └── index.html
+│   ├── models.py
+│   ├── static
+│   │   └── style.css
+│   └── templates
+│       ├── add_event.html
+│       ├── base.html
+│       ├── country_events.html
+│       └── index.html
+├── migrate_data.py
 ├── requirements.txt
 └── README.md
 ```
 
-- `data/events.json`: Contains the historical events data in JSON format.
+- `data/events.json`: Contains the initial historical events data in JSON format.
+- `instance/events.db`: The SQLite database file.
 - `src/app.py`: The main Flask application logic.
-- `src/data_loader.py`: Loads and saves the event data from/to the JSON file.
-- `src/models.py`: Defines the `Event` data model.
-- `templates/`: Contains the HTML templates for the web interface.
-- `static/`: Contains static files like CSS.
+- `src/models.py`: Defines the SQLAlchemy database models.
+- `src/templates/`: Contains the HTML templates for the web interface.
+- `src/static/`: Contains static files like CSS.
+- `migrate_data.py`: A script to create the database and populate it with data from `events.json`.
 - `requirements.txt`: Lists the Python dependencies for the project.
 
 ## How to Run
@@ -39,12 +43,18 @@ This is a web application to discover and manage historical events for various c
     pip install -r requirements.txt
     ```
 
-2.  **Run the web application:**
+2.  **Initialize the database:**
+    Run the migration script to create the database and populate it with the initial data.
+    ```bash
+    python migrate_data.py
+    ```
+
+3.  **Run the web application:**
     ```bash
     python -m src.app
     ```
 
-3.  Open your web browser and navigate to `http://127.0.0.1:8080`.
+4.  Open your web browser and navigate to `http://127.0.0.1:8080`.
 
 ## Web Interface
 

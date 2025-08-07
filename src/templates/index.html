@@ -6,7 +6,7 @@
     <h1 class="mt-5">Select a Country</h1>
     <div class="list-group mt-3">
         {% for country in countries %}
-            <a href="{{ url_for('country_events', country_name=country) }}" class="list-group-item list-group-item-action">{{ country }}</a>
+            <a href="{{ url_for('country_events', country_name=country.name) }}" class="list-group-item list-group-item-action">{{ country.name }}</a>
         {% endfor %}
     </div>
 {% endblock %}

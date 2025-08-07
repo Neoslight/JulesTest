@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
-{% block title %}Events in {{ country }}{% endblock %}
+{% block title %}Events in {{ country.name }}{% endblock %}
 
 {% block content %}
-    <h1 class="mt-5">Historical Events for {{ country }}</h1>
+    <h1 class="mt-5">Historical Events for {{ country.name }}</h1>
 
     <form method="get" class="form-inline mt-4 mb-4">
         <div class="form-group mr-2">
