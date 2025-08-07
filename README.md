@@ -6,13 +6,13 @@ This is a web application to discover and manage historical events for various c
 
 ```
 .
+├── app.py
 ├── data
 │   └── events.json
 ├── instance
 │   └── events.db
 ├── src
 │   ├── __init__.py
-│   ├── app.py
 │   ├── data_loader.py
 │   ├── models.py
 │   ├── static
@@ -27,9 +27,9 @@ This is a web application to discover and manage historical events for various c
 └── README.md
 ```
 
+- `app.py`: The main Flask application logic.
 - `data/events.json`: Contains the initial historical events data in JSON format.
 - `instance/events.db`: The SQLite database file.
-- `src/app.py`: The main Flask application logic.
 - `src/models.py`: Defines the SQLAlchemy database models.
 - `src/templates/`: Contains the HTML templates for the web interface.
 - `src/static/`: Contains static files like CSS.
@@ -51,7 +51,7 @@ This is a web application to discover and manage historical events for various c
 
 3.  **Run the web application:**
     ```bash
-    python -m src.app
+    python app.py
     ```
 
 4.  Open your web browser and navigate to `http://127.0.0.1:8080`.

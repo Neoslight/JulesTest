@@ -1,8 +1,15 @@
 import json
-from src.app import app
+import os
+from app import app
 from src.models import db, Country, Event
 
 def migrate_data():
+    # Ensure the instance folder exists
+    try:
+        os.makedirs(app.instance_path)
+    except OSError:
+        pass  # It already exists
+
     with app.app_context():
         # Create the database and tables
         db.create_all()

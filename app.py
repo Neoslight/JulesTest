@@ -1,9 +1,9 @@
 from flask import Flask, render_template, url_for, request, redirect
 from src.models import db, Country, Event
+import config
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../instance/events.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app = Flask(__name__, template_folder='src/templates', static_folder='src/static')
+app.config.from_object(config)
 db.init_app(app)
 
 @app.route('/')
