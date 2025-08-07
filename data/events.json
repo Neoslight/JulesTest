@@ -1,0 +1,22 @@
+{
+  "France": [
+    {
+      "year": 1789,
+      "event": "French Revolution begins"
+    },
+    {
+      "year": 1804,
+      "event": "Napoleon becomes Emperor"
+    }
+  ],
+  "USA": [
+    {
+      "year": 1776,
+      "event": "Declaration of Independence"
+    },
+    {
+      "year": 1861,
+      "event": "American Civil War begins"
+    }
+  ]
+}
